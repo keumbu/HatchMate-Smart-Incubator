@@ -1,7 +1,5 @@
 # OLED Display UI Logic (Single OLED)
 
-## OLED DISPLAY LOGIC (SINGLE OLED)
-
 The HatchMate Smart Incubator uses a single 128×64 I2C OLED display to present real-time system information. The display cycles through multiple screens automatically, providing clear visibility of system status without user interaction.
 
 ## OLED SCREEN PAGES

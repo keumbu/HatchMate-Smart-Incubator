@@ -1,7 +1,8 @@
-#pragma once
+#ifndef DISPLAY_H
+#define DISPLAY_H
 
-void initDisplay();
-void showStartupScreen();
-void updateDisplay();
-void showAlertScreen(const char* message);
-void rotateScreens();  // New
+void displayInit();
+void displayUpdate();
+void displayShowAlert(const char* msg);
+
+#endif

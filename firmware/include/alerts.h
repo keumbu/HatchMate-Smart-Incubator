@@ -1,4 +1,7 @@
-#pragma once
+#ifndef ALERTS_H
+#define ALERTS_H
 
-void checkAlerts();
-bool alertActive();
+void alertsUpdate();
+bool isAlertActive();
+
+#endif

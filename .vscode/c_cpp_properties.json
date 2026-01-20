@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "ESP32",
+            "name": "PlatformIO",
             "includePath": [
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/src",
@@ -9,23 +9,14 @@
                 "${workspaceFolder}/**"
             ],
             "defines": [
-                "ARDUINO=10805",
+                "ARDUINO",
                 "ESP32"
             ],
-            "compilerPath": "/usr/bin/xtensa-esp32-elf-gcc",
             "cStandard": "c17",
             "cppStandard": "gnu++17",
-            "intelliSenseMode": "linux-gcc-x64",
-            "browse": {
-                "path": [
-                    "${workspaceFolder}/include",
-                    "${workspaceFolder}/src",
-                    "${workspaceFolder}/lib",
-                    "${workspaceFolder}/**"
-                ],
-                "limitSymbolsToIncludedHeaders": true
-            }
+            "intelliSenseMode": "linux-gcc-x64"
         }
     ],
     "version": 4
 }
+

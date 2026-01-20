@@ -10,6 +10,13 @@
             "includePath": [
                 "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/include",
                 "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/src",
+                "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/.pio/libdeps/esp32dev/DallasTemperature",
+                "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/.pio/libdeps/esp32dev/OneWire",
+                "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/.pio/libdeps/esp32dev/Adafruit SSD1306",
+                "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/.pio/libdeps/esp32dev/Adafruit GFX Library",
+                "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/.pio/libdeps/esp32dev/Adafruit BusIO",
+                "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
+                "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -228,7 +235,6 @@
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/RainMaker/src",
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SD/src",
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SD_MMC/src",
-                "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src",
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SimpleBLE/src",
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/Ticker/src",
@@ -238,7 +244,6 @@
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                 "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
-                "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 ""
             ],
             "browse": {
@@ -246,6 +251,13 @@
                 "path": [
                     "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/include",
                     "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/src",
+                    "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/.pio/libdeps/esp32dev/DallasTemperature",
+                    "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/.pio/libdeps/esp32dev/OneWire",
+                    "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/.pio/libdeps/esp32dev/Adafruit SSD1306",
+                    "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/.pio/libdeps/esp32dev/Adafruit GFX Library",
+                    "/home/flash/Documents/Projects/HatchMate-Smart-Incubator/.pio/libdeps/esp32dev/Adafruit BusIO",
+                    "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
+                    "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -464,7 +476,6 @@
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/RainMaker/src",
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SD/src",
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SD_MMC/src",
-                    "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src",
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/SimpleBLE/src",
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/Ticker/src",
@@ -474,7 +485,6 @@
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                     "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
-                    "/home/flash/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     ""
                 ]
             },

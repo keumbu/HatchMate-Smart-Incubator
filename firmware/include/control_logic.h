@@ -1,7 +1,7 @@
-#pragma once
+#ifndef CONTROL_LOGIC_H
+#define CONTROL_LOGIC_H
 
-void controlTemperature();
-void controlHumidity();
-void handleEggTurning();
-void updateDayCounter();
-void checkHatchingMode();
+void controlInit();
+void controlUpdate();
+
+#endif

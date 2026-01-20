@@ -1,7 +1,10 @@
-#pragma once
+#ifndef SENSORS_H
+#define SENSORS_H
 
-void initSensors();
-void readSensors();
-
+void sensorsInit();
+void sensorsUpdate();
 float getTemperature();
 float getHumidity();
+bool sensorsHealthy();
+
+#endif

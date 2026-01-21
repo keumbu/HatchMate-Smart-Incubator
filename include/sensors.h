@@ -3,16 +3,18 @@
 
 #include <Arduino.h>
 
+// ================= SENSOR FUNCTIONS =================
+
 // Initialize sensors
 void initSensors();
 
-// Read all sensor values
+// Read all sensor values (temperature & humidity)
 void readSensors();
 
-// Get latest temperature
+// Get latest temperature value
 float getTemperature();
 
-// Get latest humidity
+// Get latest humidity value
 float getHumidity();
 
 #endif

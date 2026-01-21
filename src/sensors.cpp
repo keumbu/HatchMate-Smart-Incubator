@@ -1,26 +1,42 @@
 #include "sensors.h"
-#include <OneWire.h>
-#include <DallasTemperature.h>
 #include "pins.h"
 #include "config.h"
+#include <OneWire.h>
+#include <DallasTemperature.h>
 
+// ================= GLOBAL OBJECTS =================
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature tempSensor(&oneWire);
 
-float temperature = 0.0;
-float humidity = 0.0;
-unsigned long lastSensorRead = 0;
+// ================= GLOBAL VARIABLES =================
+static float temperature = 0.0;
+static float humidity = 0.0;
+static unsigned long lastSensorRead = 0;
 
-void initSensors() { tempSensor.begin(); }
+// ================= FUNCTION DEFINITIONS =================
+
+void initSensors() {
+    tempSensor.begin();
+    // Optionally init DHT22 here
+}
 
 void readSensors() {
     if (millis() - lastSensorRead >= SENSOR_READ_INTERVAL) {
+        // Temperature
         tempSensor.requestTemperatures();
         temperature = tempSensor.getTempCByIndex(0);
+
+        // Placeholder humidity (replace with DHT22/SHT logic later)
         humidity = 55.0;
+
         lastSensorRead = millis();
     }
 }
 
-float getTemperature() { return temperature; }
-float getHumidity() { return humidity; }
+float getTemperature() {
+    return temperature;
+}
+
+float getHumidity() {
+    return humidity;
+}

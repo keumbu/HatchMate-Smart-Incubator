@@ -15,14 +15,16 @@ static unsigned long lastSensorRead = 0;
 
 // ================= FUNCTION DEFINITIONS =================
 
+// Initialize sensors
 void initSensors() {
     tempSensor.begin();
-    // Optionally init DHT22 here
+    // Optionally add DHT22 init here if used
 }
 
+// Read temperature & humidity
 void readSensors() {
     if (millis() - lastSensorRead >= SENSOR_READ_INTERVAL) {
-        // Temperature
+        // Read temperature from DS18B20
         tempSensor.requestTemperatures();
         temperature = tempSensor.getTempCByIndex(0);
 
@@ -33,10 +35,12 @@ void readSensors() {
     }
 }
 
+// Return last read temperature
 float getTemperature() {
     return temperature;
 }
 
+// Return last read humidity
 float getHumidity() {
     return humidity;
 }

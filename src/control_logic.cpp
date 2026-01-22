@@ -1,27 +1,54 @@
 #include "control_logic.h"
-#include "actuators.h"
 #include "config.h"
-#include "utils.h"
+#include "sensors.h"
+#include "actuators.h"
 
-void handleEggTurning(unsigned long &lastTurnTime,int currentDay){
-    unsigned long now = millis();
-    if(currentDay>DAY_STOP_EGG_TURN){ turnerOff(); return; }
-    if(now - lastTurnTime >= EGG_TURN_INTERVAL*1000UL){
-        turnerOn(); delay(TURNER_DURATION_MS); turnerOff();
-        lastTurnTime = now;
+// ================= TEMPERATURE CONTROL =================
+void controlTemperature(float currentTemp) {
+    if (currentTemp < (TEMP_TARGET - TEMP_TOLERANCE)) {
+        heaterOn();
+        fanOff();
+    } 
+    else if (currentTemp > (TEMP_TARGET + TEMP_TOLERANCE)) {
+        heaterOff();
+        fanOn();
+    } 
+    else {
+        // Maintain current state
+        heaterOff();
+        fanOff();
     }
 }
 
-void controlTemperature(float temperature){
-    if(temperature < (TEMP_TARGET-TEMP_TOLERANCE)){ heaterOn(); fanOff(); }
-    else if(temperature > (TEMP_TARGET+TEMP_TOLERANCE)){ heaterOff(); fanOn(); }
-    else{ heaterOff(); fanOff(); }
+// ================= HUMIDITY CONTROL =================
+void controlHumidity(float currentHumid) {
+    // Day 1-18: normal humidity
+    if (currentHumid < HUMIDITY_DAY_1_18) {
+        humidifierOn();
+    } else {
+        humidifierOff();
+    }
+
+    // For day 19-21, you can add logic in main.cpp to change target
 }
 
-void controlHumidity(float humidity,int day){
-    if(day<=18){
-        if(humidity<HUMIDITY_DAY_1_18) humidifierOn(); else humidifierOff();
-    }else{
-        if(humidity<HUMIDITY_DAY_19_21) humidifierOn(); else humidifierOff();
+// ================= EGG TURNING CONTROL =================
+void handleEggTurning(unsigned long currentMillis, unsigned long &lastTurnTime) {
+    if (currentMillis - lastTurnTime >= EGG_TURN_INTERVAL) {
+        turnerOn();
+        delay(5000); // Turn eggs for 5 seconds (adjust if needed)
+        turnerOff();
+        lastTurnTime = currentMillis;
     }
 }
+
+// ================= OPTIONAL CONTROL LOOP =================
+void controlLoop(unsigned long currentMillis, unsigned long &lastTurnTime) {
+    float temp = getTemperature();
+    float humid = getHumidity();
+
+    controlTemperature(temp);
+    controlHumidity(humid);
+    handleEggTurning(currentMillis, lastTurnTime);
+}
+

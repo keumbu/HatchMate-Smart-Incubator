@@ -1,22 +1,57 @@
 #include "actuators.h"
 #include "pins.h"
-#include <Arduino.h>
 
+// ================= INITIALIZATION =================
 void initActuators() {
+    // Relays
     pinMode(HEATER_RELAY, OUTPUT);
     pinMode(FAN_RELAY, OUTPUT);
     pinMode(HUMIDIFIER_RELAY, OUTPUT);
     pinMode(TURNER_RELAY, OUTPUT);
-    pinMode(BUZZER_PIN, OUTPUT);
+
+    // LEDs
     pinMode(ALARM_LED, OUTPUT);
-    pinMode(WIFI_LED, OUTPUT);
+    
+    // Buzzer
+    pinMode(BUZZER_PIN, OUTPUT);
+
+    // Optional: turn all OFF at startup
+    heaterOff();
+    fanOff();
+    humidifierOff();
+    turnerOff();
+    setAlarmLED(false);
 }
 
-void heaterOn() { digitalWrite(HEATER_RELAY, HIGH); }
+// ================= HEATER =================
+void heaterOn()  { digitalWrite(HEATER_RELAY, HIGH); }
 void heaterOff() { digitalWrite(HEATER_RELAY, LOW); }
-void fanOn() { digitalWrite(FAN_RELAY, HIGH); }
+
+// ================= FAN =================
+void fanOn()  { digitalWrite(FAN_RELAY, HIGH); }
 void fanOff() { digitalWrite(FAN_RELAY, LOW); }
-void humidifierOn() { digitalWrite(HUMIDIFIER_RELAY, HIGH); }
+
+// ================= HUMIDIFIER =================
+void humidifierOn()  { digitalWrite(HUMIDIFIER_RELAY, HIGH); }
 void humidifierOff() { digitalWrite(HUMIDIFIER_RELAY, LOW); }
-void turnerOn() { digitalWrite(TURNER_RELAY, HIGH); }
+
+// ================= EGG TURNER =================
+void turnerOn()  { digitalWrite(TURNER_RELAY, HIGH); }
 void turnerOff() { digitalWrite(TURNER_RELAY, LOW); }
+
+// ================= BUZZER =================
+void beepShort() {
+    digitalWrite(BUZZER_PIN, HIGH);
+    delay(100);
+    digitalWrite(BUZZER_PIN, LOW);
+}
+
+void beepContinuous() {
+    digitalWrite(BUZZER_PIN, HIGH);
+}
+
+// ================= LED =================
+void setAlarmLED(bool state) {
+    digitalWrite(ALARM_LED, state ? HIGH : LOW);
+}
+

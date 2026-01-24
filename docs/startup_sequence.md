@@ -101,7 +101,6 @@ Any detected fault places the system into a safe state.
 
 The system now operates autonomously.
 
----
 
 ## Fault Handling During Startup
 

@@ -1,5 +1,11 @@
 #include "wifi_manager.h"
-
+#include "actuators.h"
+#include "sensors.h"
+#include "display.cpp"
+#include "control_logic.cpp"
+#include "utils.h"
+#include "config.h"
+#include "alerts.cpp"
 void setup() {
     Serial.begin(115200);
     initWiFi();   // Initialize Wi-Fi
@@ -9,6 +15,7 @@ void setup() {
     showStartupScreen();
     beepShort();
 }
+unsigned long lastTurnTime = 0;
 
 void loop() {
     readSensors();
@@ -16,6 +23,7 @@ void loop() {
     controlTemperature(getTemperature());
     controlHumidity(getHumidity());
     handleEggTurning(millis(), lastTurnTime);
+    println 
 
     checkAlerts(getTemperature(), getHumidity(), isWiFiConnected());
 

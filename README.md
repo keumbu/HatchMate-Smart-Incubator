@@ -81,6 +81,7 @@ Detailed technical documentation for this project is available in the `docs/` di
 - [System Overview](docs/system_overview.md)
 - [Hardware Design](docs/hardware_design.md)
 - [Incubation Parameters](docs/incubation_parameters.md)
+- [Incubation Mode (Day 21)](docs/incubation_mode.md)
 - [Startup Sequence](docs/startup_sequence.md)
 - [Control Logic](docs/control_logic.md)
 - [Algorithm](docs/algorithm.md)

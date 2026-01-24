@@ -1,148 +1,180 @@
-# Alert, Buzzer & safety Logic 
+# Alerts & Faults
 
-The HatchMate Smart Incubator includes a robust safety and alert system to protect eggs and notify the user of abnormal conditions. Alerts are presented through OLED messages, LEDs, buzzer patterns, and Wi‑Fi notifications. Critical alerts take priority over normal display rotation.
+## Overview
 
-## High Temperature Alert
+This document describes the alert and fault-handling mechanisms implemented
+in the HatchMate smart incubator.  
+Alerts are used to notify the user of abnormal conditions, while faults trigger
+protective actions to prevent damage to eggs and hardware.
 
-Trigger Condition:
 
-Temperature > 38.5°C
+## Objectives of Alert & Fault System
 
-System Response:
+The alert and fault system aims to:
+- Detect abnormal operating conditions
+- Protect eggs from unsafe environments
+- Prevent hardware damage
+- Provide clear user feedback
+- Enable future remote notifications
 
-Heater OFF
 
-Fan ON (forced cooling)
+## Alert vs Fault Classification
 
-Alarm LED BLINKING
+### Alerts
 
-Buzzer CONTINUOUS tone
+Alerts indicate abnormal conditions that require attention but do not
+immediately stop system operation.
 
-OLED switches to Alert Screen
+Examples:
+- Temperature slightly out of range
+- Humidity outside recommended limits
+- Wi-Fi disconnected (future feature)
 
-OLED Alert Screen:
 
-HIGH TEMP
-39.8°C
-Cooling...
+### Faults
 
-Remote Notification:
+Faults represent critical conditions that require immediate protective action.
 
-Wi‑Fi / Cloud alert message:
+Examples:
+- Sensor failure
+- Extreme temperature
+- System initialization failure
+- Power instability
 
-“HIGH TEMPERATURE WARNING”
+Faults force the system into a safe state.
 
-Safety Note:
 
-Cooling remains active until temperature returns to safe range
+## Temperature Alerts & Faults
 
-## Low Temperature Alert
+### High Temperature Alert
+- Trigger condition: Temperature > target range
+- Action:
+  - Heater OFF
+  - Ventilation ON
+  - Alert displayed
 
-Trigger Condition:
+### Over-Temperature Fault
+- Trigger condition: Temperature > maximum safe limit
+- Action:
+  - Heater disabled
+  - Ventilation forced ON
+  - Fault message displayed
+  - System remains in safe mode
 
-Temperature < 35.0°C
 
-System Response:
+### Low Temperature Alert
+- Trigger condition: Temperature < target range
+- Action:
+  - Heater ON
+  - Alert displayed
 
-Alarm LED BLINKING
+### Under-Temperature Fault
+- Trigger condition: Temperature < minimum safe limit
+- Action:
+  - Heater disabled
+  - Fault displayed
 
-Buzzer INTERMITTENT beeps
 
-OLED displays low temperature alert
+## Humidity Alerts
 
-OLED Alert Screen:
+### High Humidity Alert
+- Trigger condition: Humidity > maximum limit
+- Action:
+  - Increase ventilation
+  - Display warning
 
-LOW TEMP
-34.6°C
-Heating...
+### Low Humidity Alert
+- Trigger condition: Humidity < minimum limit
+- Action:
+  - Reduce ventilation
+  - Display warning
 
-Remote Notification:
+Humidity alerts do not immediately stop operation.
 
-Wi‑Fi / Cloud alert message:
 
-“LOW TEMPERATURE WARNING”
+## Sensor Fault Detection
 
-## Low Humidity 
+### Temperature Sensor Fault
+- No response from sensor
+- Invalid or out-of-range readings
 
-Trigger Condition:
+### Humidity Sensor Fault
+- Communication failure
+- Invalid data
 
-Humidity below minimum threshold for current incubation day
+**Action for Sensor Faults:**
+1. Disable heating element
+2. Enable ventilation
+3. Display sensor fault message
+4. Prevent normal operation
 
-System Response:
 
-Alarm LED BLINKING
+## Actuator Faults (Future Detection)
 
-Buzzer SHORT periodic beep
+Planned detection methods:
+- Feedback from motor driver
+- Relay status verification
+- Current monitoring
 
-OLED displays humidity alert
+In case of actuator failure:
+- Disable affected subsystem
+- Raise fault alert
 
-OLED Alert Screen:
 
-LOW HUMIDITY
-45%
-Misting...
+## Startup Faults
 
-Remote Notification:
+Faults detected during startup include:
+- Sensor initialization failure
+- Display initialization failure
+- Parameter loading error
 
-Wi‑Fi / Cloud alert message:
+Startup faults prevent transition to normal operation.
 
-“LOW HUMIDITY WARNING”
 
-## Wi‑Fi Failure Alert
+## Fault Recovery Strategy
 
-Trigger Condition:
+- Alerts clear automatically when conditions return to normal
+- Faults require:
+  - System reset
+  - User intervention
+  - Component replacement (if required)
 
-Wi‑Fi disconnected or lost
+Fault states are latched to prevent unsafe oscillations.
 
-System Response:
 
-Wi‑Fi LED FAST BLINKING
+## User Notification Methods
 
-Buzzer DOUBLE deep beep (non‑continuous)
+Current:
+- OLED display messages
+- Visual status indicators
 
-OLED displays Wi‑Fi status message
+Future:
+- Wi-Fi notifications
+- Mobile alerts
+- Cloud logging
 
-OLED Status Screen:
 
-Wi‑Fi LOST
-Offline Mode
+## Fail-Safe Behavior Summary
 
-Operational Behavior:
+When a fault is detected:
+1. Heating is disabled
+2. Ventilation is enabled
+3. Egg turning is paused
+4. User is notified
+5. System remains in safe mode
 
-Incubator continues NORMAL autonomous operation
 
-All temperature, humidity, and egg turning controls remain active
+## Design Considerations
 
-Data synchronization resumes automatically once Wi‑Fi reconnects
+- Fault detection prioritized over normal control
+- Safety overrides performance
+- Alerts do not interfere with real-time operation
+- Expandable fault detection architecture
 
-## Alert Priority Rules
 
-Alert screens override normal OLED rotation
+## Conclusion
 
-Only one alert is displayed at a time
-
-Priority order:
-
-High Temperature
-
-Low Temperature
-
-Low Humidity
-
-Wi‑Fi Failure
-
-## Buzzer Pattern 
-
-Condition	Buzzer Pattern
-High Temperature	Continuous tone
-Low Temperature	Intermittent beep
-Low Humidity	Short periodic beep
-Wi‑Fi Failure	Double deep beep
-
-Design Philosophy:
-
-Safety‑critical alerts are loud and persistent
-
-Non‑critical alerts are informative but non‑disruptive
-
-The incubator never stops control operations due to Wi‑Fi failure
+The alert and fault-handling system ensures safe and reliable operation of the
+HatchMate incubator.  
+By actively monitoring system health and responding appropriately, the system
+protects both the incubation process and the hardware.

@@ -1,117 +1,145 @@
-# OLED Display UI Logic (Single OLED)
+# Display UI
 
-The HatchMate Smart Incubator uses a single 128×64 I2C OLED display to present real-time system information. The display cycles through multiple screens automatically, providing clear visibility of system status without user interaction.
+## Overview
 
-## OLED SCREEN PAGES
+This document describes the user interface displayed on the OLED screen of the
+HatchMate smart incubator.  
+The display provides real-time feedback on system status, incubation conditions,
+and alerts, enabling the user to monitor the incubator at a glance.
 
-The OLED uses multiple rotating screens, switching automatically every 5–8 seconds.
+The interface is designed to be simple, clear, and readable under various
+lighting conditions.
 
-SCREEN 1 – MAIN STATUS (DEFAULT)
-HATCHMATE
-T: 37.5°C   H: 55%
-Day: 07/21
-Mode: INC   Wi-Fi ✓
 
-Description:
+## Display Hardware
 
-Displays incubator name
+- OLED display (I2C)
+- Resolution: typically 128 × 64 pixels
+- Low power consumption
+- High contrast for easy readability
 
-Current temperature and humidity
+The display communicates with the ESP32 via the I2C protocol.
 
-Incubation day progress
 
-Incubation mode and Wi‑Fi status
+## UI Design Objectives
 
-SCREEN 2 – ACTUATORS STATUS
-ACTUATORS
-HEATER: ON
-FAN: OFF
-HUMID: ON
-TURNER: OFF
+The display interface is designed to:
+- Present critical information clearly
+- Minimize clutter
+- Provide immediate alert visibility
+- Operate reliably with periodic refresh
+- Avoid distracting animations
 
-Description:
 
-Shows current ON/OFF state of all actuators
+## Default Display Screen
 
-SCREEN 3 – EGG TURNING STATUS
-EGG TURNING
-Status: ENABLED
-Next turn: 01:20
-Stop at Day 18
+The default screen shows the primary incubation parameters:
 
-Description:
+- Current temperature (°C)
+- Current humidity (%RH)
+- System status (Normal / Alert / Fault)
+- Egg turning countdown timer
 
-Indicates if egg turning is active
+This screen is shown during normal operation.
 
-Countdown to next turning cycle
 
-Automatic stop day
+## Screen Layout Example
 
-SCREEN 4 – HUMIDITY DETAIL
-HUMIDITY
-Current: 52%
-Target: 55%
-Mist: ON
+| Temp: 37.5 C |
+| Hum: 52 % |
+| Status: NORMAL |
+| Turn in: 01:35 |
 
-Description:
 
-Displays humidity control details
 
-Shows humidifier state
+## Startup Screen
 
-SCREEN 5 – TEMPERATURE DETAIL
-TEMPERATURE
-Current: 37.5°C
-Target: 37.5°C
-State: STABLE
+During system initialization, the display shows:
 
-Description:
+- Project name
+- Firmware version (optional)
+- Startup status message
 
-Shows temperature regulation status
+Example:
 
-Indicates system stability
+HatchMate
+Initializing...
 
-SCREEN 6 – CONNECTIVITY STATUS
-CONNECTIVITY
-Wi-Fi: CONNECTED
-Cloud: SYNC OK
-Last send: 3m
 
-Description:
+This confirms successful power-on to the user.
 
-Displays Wi‑Fi connection status
 
-Cloud synchronization state
+## Alert Display Screen
 
-Time since last data upload
+When an alert is active:
+- Alert message overrides normal status
+- Parameter causing alert is highlighted
+- Alert remains visible until condition clears
 
-## OLED ROTATION ALGORITHM
+Example:
 
-The display rotation is managed automatically by the ESP32 firmware.
+ALERT!
+High Temperature
 
-Rotation Rules:
 
-Switch screens every 5 seconds
 
-Pause (freeze) rotation when:
+## Fault Display Screen
 
-An alert condition is active
+When a fault is detected:
+- Fault message is displayed prominently
+- Normal data display is suspended
+- System remains in safe state
 
-A user button is pressed (optional feature)
+Example:
 
-Logic Flow (Pseudocode):
+FAULT!
+Temp Sensor Error
 
-IF alert_active == TRUE
-    display ALERT_SCREEN
-ELSE
-    display current_screen
-    every 5 seconds → next screen
-ENDIF
 
-Design Notes:
+Fault messages require user intervention.
 
-Alert screens always take priority
 
-Rotation resumes automatically after alert clearance
+## Screen Update Strategy
 
-OLED content is optimized for clarity and low power consumption
+- Display updates occur at fixed intervals
+- Non-blocking timing is used
+- Only changed values are refreshed when possible
+
+This reduces flicker and improves readability.
+
+
+## UI State Transitions
+
+The display operates in the following states:
+1. Startup
+2. Normal operation
+3. Alert
+4. Fault
+
+State transitions are controlled by system logic and fault detection.
+
+
+## Icon & Symbol Usage (Optional)
+
+Future UI enhancements may include:
+- Status icons
+- Wi-Fi connection indicator
+- Warning symbols
+
+Icons improve usability without adding text clutter.
+
+
+## Localization & Customization (Future)
+
+The UI design supports:
+- Multiple languages
+- Unit customization
+- User-defined display preferences
+
+
+## Summary
+
+The HatchMate display UI provides a clear and effective interface between the
+user and the incubator system.  
+By presenting essential information in a structured manner, the UI enhances
+usability, safety, and system transparency.
